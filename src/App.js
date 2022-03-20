@@ -22,6 +22,12 @@ function App() {
     e.preventDefault();
     if (!validator.isEmail(signupInput.email)) {
       return setError("The email you input is invalid.");
+    } else if (signupInput.password.length < 5) {
+      return setError(
+        "The password you entered should contain 5 or more characters"
+      );
+    } else if (signupInput.password !== signupInput.confirmPassword) {
+      return setError("The passwords don't match. Try again");
     }
   };
 
@@ -67,7 +73,7 @@ function App() {
             onChange={handleChange}
           />
         </div>
-        {error && <p className="text-danger">The email you input is invalid</p>}
+        {error && <p className="text-danger">{error}</p>}
         <button type="submit" className="btn btn-primary" onClick={handleClick}>
           Submit
         </button>
